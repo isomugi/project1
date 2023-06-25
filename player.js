@@ -9,6 +9,7 @@ class Player{
         this.anime = 0;
         this.reload = 0;
         this.reload2 = 0;
+        this.delFlag = false;
     }
 
     update(){
@@ -45,6 +46,20 @@ class Bullet extends CharacterBase{
     }
     update(){
         super.update();
+        for(let i=0 ; i<enemies.length ; i++){
+            if(!enemies[i].kill){
+                if(checkHitCirc(this, enemies[i])){
+                    if(this.snum == 3){
+                        enemies[i].dead++;
+                    }else if(this.snum == 4){
+                        enemies[i].dead+=2;
+                    }
+                    this.dead++;
+                    break;
+                }
+            }
+        }
+        if(this.dead>=1)this.delFlag = true;
     }
     draw(){
         super.draw();

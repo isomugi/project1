@@ -1,14 +1,11 @@
 //for enemy setting
 //enemy
 class Enemy extends CharacterBase{
-    constructor(x, y, vx, vy, snum){
-
+    constructor(x, y, vx, vy, snum=5){
         super(x, y, vx, vy, snum);
         this.reload = 0;
         this.reload2 = 0;
         this.bullet = snum+2;
-        this.sw = sprite[snum].w;
-        this.sh = sprite[snum].h;
         this.flag = false;
         this.count = 0;
     }
@@ -31,7 +28,7 @@ class Enemy extends CharacterBase{
             an += random(-10,10)*Math.PI/180; //*Math.PI/180は弧度法（ラジアン）にしている
             let dx = Math.cos(an)*1000;
             let dy = Math.sin(an)*1000;
-            if(this.flag)enemybullets.push(new EnemyBullet(this.x+this.sw, this.y+this.sh, dx, dy, this.bullet));
+            if(this.flag)enemybullets.push(new EnemyBullet(this.x+this.w, this.y+this.h, dx, dy, this.bullet));
             this.reload = 10;
             if(++this.reload2 == 3){
                 this.reload = 20;
@@ -39,7 +36,7 @@ class Enemy extends CharacterBase{
             }
         }
         this.reload--;
-        
+        if(this.dead >= 4)this.delFlag = true;
     }
 
     draw(){

@@ -8,6 +8,9 @@ class CharacterBase{
         this.vx = vx;
         this.vy = vy;
         this.delFlag = false;
+        this.w = sprite[snum].w;
+        this.h = sprite[snum].h;
+        this.dead = 0;
     }
 
     update(){

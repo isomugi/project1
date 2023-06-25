@@ -45,3 +45,29 @@ function drawSprite(snum, x, y, s=1){
     vcont.drawImage(SpriteImage, sx, sy, sw, sh, px, py, sw*s, sh*s);
 }
 
+//矩形同士の当たり判定
+function checkHitRect(bullet, character, s=1){
+    let bx = bullet.x>>8;
+    let by = bullet.y>>8;
+    let bw = bullet.w;
+    let bh = bullet.h;
+    let cx = character.x>>8;
+    let cy = character.y>>8;
+    let cw = character.w*s;
+    let ch = character.h*s;
+    if(bx<=cx+cw){
+        if(bx+bw>=cx){
+            if(by<=cy+ch){
+                if(by+bh>=cy)return true;
+            }
+        }
+    }
+}
+
+//円同士の当たり判定
+function checkHitCirc(bullet, character, s=1){
+    let a = (character.x - bullet.x)>>8;
+    let b = (character.y - bullet.y)>>8;
+    let r = character.w/2*s + bullet.w/2;
+    if(a*a+b*b<=r*r)return true;
+}
