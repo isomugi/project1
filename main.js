@@ -56,10 +56,9 @@ SpriteImage.src = "sprite.png";
 
 let bullets = [];
 
-let enemies = [
-    new Enemy(100<<8, 100<<8, 0, 0, 5),
-    new Enemy(200<<8, 200<<8, 0, 0, 8),
-];
+let enemies = [];
+let enemyName = []
+let enemybullets = [];
 
 let player = new Player;
 
@@ -79,9 +78,10 @@ function debugShow(){
         }
         cont.font = "20px 'Impact'";
         cont.fillStyle = "white";
-        cont.fillText('FPS:'+fps, 120, 20)
-        cont.fillText('Bullets:'+bullets.length, 20, 20)
+        cont.fillText('FPS:'+fps, 20, 80)
+        cont.fillText('PlayerBullets:'+bullets.length, 20, 20)
         cont.fillText('Enemies:'+enemies.length, 20, 40)
+        cont.fillText('EnemyBullets:'+enemybullets.length, 20, 60)
     }
 }
 
@@ -97,6 +97,7 @@ function upadateAll(){
     updateObject(stars);
     updateObject(bullets);
     updateObject(enemies);
+    updateObject(enemybullets);
     player.update();
 }
 
@@ -107,6 +108,7 @@ function drawAll(){
     drawObject(stars);
     drawObject(bullets);
     drawObject(enemies);
+    drawObject(enemybullets);
     r = random(0,2);
     player.draw(r);
 
@@ -123,9 +125,9 @@ function drawAll(){
 
 //game Loop
 function gameLoop(){
-    /* if(random(0,10)==1){
-        enemies.push(new Enemy(random(0,FIELD_W)<<8, 0, random(-256, 256), random(256,512)))
-    } */
+    if(random(0,50)==1){
+        enemies.push(new Enemy(random(0,FIELD_W)<<8, 0, random(-256, 256), random(512,1024)))
+    }
     upadateAll();
 
     drawAll();
